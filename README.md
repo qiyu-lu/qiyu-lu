@@ -12,6 +12,16 @@ Redis, and Linux-based development.
 - ROS/C++ robotics systems
 - Java backend services, MySQL schema design, and Redis-based caching
 
+## Open Source
+
+- Contributed ROS 2 Foxy compatibility and map visualization fixes to
+  [6-robot/jie_3d_nav](https://github.com/6-robot/jie_3d_nav), merged upstream into `main`
+  via [PR #1](https://github.com/6-robot/jie_3d_nav/pull/1).
+- Contributed experimental ROS 2 Foxy compatibility support to
+  [v4rl-ucy/ellipselio](https://github.com/v4rl-ucy/ellipselio), merged upstream into
+  [`foxy-experimental`](https://github.com/v4rl-ucy/ellipselio/tree/foxy-experimental)
+  via [PR #4](https://github.com/v4rl-ucy/ellipselio/pull/4).
+
 ## Tech Stack
 
 <p>
