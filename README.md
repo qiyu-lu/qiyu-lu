@@ -17,18 +17,17 @@ delivery, Canal replays the MySQL binlog into Elasticsearch (IK tokenizer + geo 
 query), WebSocket over Redis pub/sub pushes order results across instances, and a JMeter plus
 fault-injection harness asserts MySQL / Redis / Stream / DLQ state instead of just the HTTP error rate.
 
-**[ragent-legacy](https://github.com/qiyu-lu/ragent-legacy)** — Agentic RAG service (Java 17,
-Spring Boot 3.5, Milvus, React), rebuilt while studying [nageoffer/ragent](https://github.com/nageoffer/ragent):
-multi-route retrieval, tree-structured intent classification, query rewriting, session memory,
-MCP tool calls, and full-link tracing. Working through the trace layer end to end is what surfaced
-the run-lifecycle bug I later fixed upstream.
-
-**[ins-d-qpvt-tum](https://github.com/qiyu-lu/ins-d-qpvt-tum)** — lab tooling in Python: reads QPVT
-frames from an Inertial Labs INS-D over serial and segments them into TUM ground-truth trajectories,
-with a read-only viewer in a separate process so live plotting can never drop frames.
-
-**[mini-spring](https://github.com/qiyu-lu/mini-spring)** — reimplementing Spring's IoC and AOP core
-from scratch to understand the container rather than just configure it.
+**[ragent](https://github.com/qiyu-lu/ragent)** — industrial document RAG service for iron-ore domain
+knowledge, built on [Ragent 1.1.0](https://github.com/nageoffer/ragent) (Java 17, Spring Boot 3.5,
+PostgreSQL + pgvector). Reuses the upstream SSE, model-adapter and ingestion layers, and adds
+structure-aware XLSX chunking with exact cell provenance, request-level retrieval, evidence-constrained
+task closure, and a fixed regression evaluation set (3 documents, 24 questions, 15 parse anchors, with
+hash-verified paired replay). Measured: oversized chunks 70 → 0 and duplicates 17 → 0; context precision
+17.1% → 29.2% at half the average retrieved context, against Hit@5 95.2% → 90.5%. A fair-refill
+mechanism that missed its quality gate stays behind a feature flag, default off. The project claims
+better chunking, retrieval behaviour and auditability — not better answer accuracy, which held at 79.2%
+strict pass either side of the change. Closing the trace-cancellation races here produced the upstream
+PR below.
 
 ## Open Source
 
@@ -50,8 +49,9 @@ run as `CANCELLED` when the user aborts mid-stream · [scomup/likd-tree#1](https
 LiDAR-inertial odometry and mapping: degeneracy and uncertainty handling in the estimator,
 continuous-time trajectory formulations, and fusing leg odometry on quadruped platforms. Most of it
 lives in private research builds on top of FAST-LIO2, LIO-SAM, Traj-LO, LegKILO and voxel-based
-mapping, together with automation for running algorithms across benchmark datasets. The ROS 2 and
-C++ contributions above came out of this work.
+mapping, together with automation for running algorithms across benchmark datasets and
+[ins-d-qpvt-tum](https://github.com/qiyu-lu/ins-d-qpvt-tum) for turning INS-D serial output into TUM
+ground-truth trajectories. The ROS 2 and C++ contributions above came out of this work.
 
 ## Tech Stack
 
@@ -64,7 +64,7 @@ Backend & AI
   <img alt="Redis" src="https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white">
   <img alt="RocketMQ" src="https://img.shields.io/badge/RocketMQ-D77310?style=flat&logo=apacherocketmq&logoColor=white">
   <img alt="Elasticsearch" src="https://img.shields.io/badge/Elasticsearch-005571?style=flat&logo=elasticsearch&logoColor=white">
-  <img alt="Milvus" src="https://img.shields.io/badge/Milvus-00A1EA?style=flat&logo=milvus&logoColor=white">
+  <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL%20%2B%20pgvector-4169E1?style=flat&logo=postgresql&logoColor=white">
   <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white">
 </p>
 
