@@ -39,11 +39,6 @@ answer pass remained `79.2%`.
 
 ## Research & Open Source
 
-I work on LiDAR-inertial odometry and mapping, with a focus on estimator degeneracy, continuous-time
-trajectories, and leg-odometry fusion for quadruped platforms. I also maintain
-[ins-d-qpvt-tum](https://github.com/qiyu-lu/ins-d-qpvt-tum), a small tool for converting INS-D serial
-output into TUM ground-truth trajectories.
-
 Merged contributions:
 
 - [ccfos/huatuo](https://github.com/ccfos/huatuo) — tests, logging correction, and static-analysis cleanup ([PRs](https://github.com/ccfos/huatuo/pulls?q=is%3Apr+author%3Aqiyu-lu+is%3Amerged))
